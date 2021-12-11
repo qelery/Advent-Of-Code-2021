@@ -6,22 +6,17 @@ import java.util.List;
 
 public class DivePuzzle extends DailyPuzzle {
 
-    public record Point(int x, int y) {
-    }
-
     public static void main(String[] args) {
         List<String> lines = readFile("day02.txt");
-        Point point1 = parseInstructions1(lines);
-        System.out.println("Part 1 - Final depth time horizontal position: " + point1.x * point1.y);
-        Point point2 = parseInstructions2(lines);
-        System.out.println("Part 2 - Final depth time horizontal position: " + point2.x * point2.y);
+        System.out.println("Part 1 - Final depth times horizontal position: " + parseInstructions1(lines));
+        System.out.println("Part 2 - Final depth times horizontal position: " + parseInstructions2(lines));
     }
 
     /**
      * Time Complexity: O(n)
      * Space Complexity: O(n)
      */
-    public static Point parseInstructions1(List<String> instructions) {
+    public static int parseInstructions1(List<String> instructions) {
         int x = 0;
         int y = 0;
         for (String instr : instructions) {
@@ -35,14 +30,14 @@ public class DivePuzzle extends DailyPuzzle {
                 default -> throw new IllegalStateException("Invalid direction: " + direction);
             }
         }
-        return new Point(x, y);
+        return x * y;
     }
 
     /**
      * Time Complexity: O(n)
      * Space Complexity: O(n)
      */
-    public static Point parseInstructions2(List<String> instructions) {
+    public static int parseInstructions2(List<String> instructions) {
         int x = 0;
         int y = 0;
         int aim = 0;
@@ -60,6 +55,6 @@ public class DivePuzzle extends DailyPuzzle {
                 default -> throw new IllegalStateException("Invalid direction: " + direction);
             }
         }
-        return new Point(x, y);
+        return x * y;
     }
 }
