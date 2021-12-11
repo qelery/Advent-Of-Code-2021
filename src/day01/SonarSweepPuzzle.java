@@ -8,7 +8,7 @@ import java.util.List;
 public class SonarSweepPuzzle extends DailyPuzzle {
 
     public static void main(String[] args) {
-        List<String> lines = readFile("day01.data");
+        List<String> lines = readFile("day01.txt");
         int[] numbers = Conversions.convertToIntArray(lines);
         System.out.println("Part 1 - Number of increasing: " + countIncreasingSlidingWindows(numbers, 1));
         System.out.println("Part 2 - Number of increasing sliding window size of 3: " +
