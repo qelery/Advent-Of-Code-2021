@@ -11,7 +11,7 @@ public class SonarSweepPuzzle extends DailyPuzzle {
         List<String> lines = readFile("day01.data");
         int[] numbers = Conversions.convertToIntArray(lines);
         System.out.println("Number of increasing: " + countIncreasing(numbers));
-        System.out.println("Number of increasing sliding window: " + countIncreasingSlidingWindows(numbers));
+        System.out.println("Number of increasing sliding window: " + countIncreasingSlidingWindows(numbers, 3));
     }
 
     /**
@@ -33,16 +33,17 @@ public class SonarSweepPuzzle extends DailyPuzzle {
     }
 
     /**
-     *
+     * Time Complexity: O(n * m), where n is length of numbers and m is windowSize
+     * Space Complexity: O(n)
      */
-    public static int countIncreasingSlidingWindows(int[] numbers) {
+    public static int countIncreasingSlidingWindows(int[] numbers, int windowSize) {
         if (numbers == null || numbers.length == 0) {
             return 0;
         }
 
-        int[] runningTotals = new int[numbers.length-2];
+        int[] runningTotals = new int[numbers.length - windowSize + 1];
         for (int i = 0; i < runningTotals.length; i++) {
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < windowSize; j++) {
                 runningTotals[i] += numbers[i + j];
             }
         }
