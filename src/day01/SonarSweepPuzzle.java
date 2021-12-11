@@ -10,30 +10,18 @@ public class SonarSweepPuzzle extends DailyPuzzle {
     public static void main(String[] args) {
         List<String> lines = readFile("day01.data");
         int[] numbers = Conversions.convertToIntArray(lines);
-        System.out.println("Number of increasing: " + countIncreasing(numbers));
-        System.out.println("Number of increasing sliding window: " + countIncreasingSlidingWindows(numbers, 3));
+        System.out.println("Part 1 - Number of increasing: " + countIncreasingSlidingWindows(numbers, 1));
+        System.out.println("Part 2 - Number of increasing sliding window size of 3: " +
+                countIncreasingSlidingWindows(numbers, 3));
     }
 
     /**
-     * Time complexity: O(n)
-     * Space complexity: O(n)
-     */
-    public static int countIncreasing(int[] numbers) {
-        if (numbers == null || numbers.length == 0) {
-            return 0;
-        }
-
-        int count = 0;
-        int last = numbers[0];
-        for (int current : numbers) {
-            if (current > last) count++;
-            last = current;
-        }
-        return count;
-    }
-
-    /**
-     * Time Complexity: O(n * m), where n is length of numbers and m is windowSize
+     * Given SlidingWindowA and SlidingWindowB, all elements of the two windows overlap except
+     * for the first element of SlidingWindowA and the last element of SlidingWindowB. Therefore,
+     * the difference between the two windows is the difference between the first element of
+     * SlidingWindowA and the last element of SlidingWindowB.
+     *
+     * Time Complexity: O(n)
      * Space Complexity: O(n)
      */
     public static int countIncreasingSlidingWindows(int[] numbers, int windowSize) {
@@ -41,12 +29,10 @@ public class SonarSweepPuzzle extends DailyPuzzle {
             return 0;
         }
 
-        int[] runningTotals = new int[numbers.length - windowSize + 1];
-        for (int i = 0; i < runningTotals.length; i++) {
-            for (int j = 0; j < windowSize; j++) {
-                runningTotals[i] += numbers[i + j];
-            }
+        int count = 0;
+        for (int i = windowSize; i < numbers.length; i++) {
+            if (numbers[i] > numbers[i - windowSize]) count++;
         }
-        return countIncreasing(runningTotals);
+        return count;
     }
 }
