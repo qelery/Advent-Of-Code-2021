@@ -1,11 +1,8 @@
 package day03;
 
-import util.Conversions;
 import util.DailyPuzzle;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BinaryDiagnosticPuzzle extends DailyPuzzle {
 
@@ -14,21 +11,27 @@ public class BinaryDiagnosticPuzzle extends DailyPuzzle {
         System.out.println("Part 1 - Final depth times horizontal position: " + calculatePowerConsumption(lines));
     }
 
+    /**
+     * Time complexity: O(n * m), where n is the length of lines, and m is the length of a line
+     * Space complexity: O(n)
+     */
     public static long calculatePowerConsumption(List<String> lines) {
-        int lengthInput = lines.get(0).length();
-        int[] mostCommonBit = new int[lengthInput];
-        for (String line : lines) {
-            for (int j = 0; j < lengthInput; j++) {
-                char c = line.charAt(j);
-                if (c == '1') {
-                    mostCommonBit[j]++;
-                } else {
-                    mostCommonBit[j]--;
-                }
+        int lineLength = lines.get(0).length();
+        StringBuilder gammaBinary = new StringBuilder();
+        StringBuilder epsilonBinary = new StringBuilder();
+        for (int i = 0; i < lineLength; i++) {
+            int ones = 0;
+            int zeros = 0;
+            for (String line : lines) {
+                char c = line.charAt(i);
+                if (c == '0') zeros++;
+                else ones++;
             }
+            gammaBinary.append(zeros > ones ? "0" : "1");
+            epsilonBinary.append(zeros > ones ? "1" : "0");
         }
-        String gamma = Arrays.stream(mostCommonBit).map(x -> x > 0 ? 1 : 0).mapToObj(Integer::toString).collect(Collectors.joining());
-        String epsilon = Arrays.stream(mostCommonBit).map(x -> x > 0 ? 0 : 1).mapToObj(Integer::toString).collect(Collectors.joining());
-        return Long.parseLong(gamma, 2) * Long.parseLong(epsilon, 2);
+        long gamma = Long.parseLong(gammaBinary.toString(), 2);
+        long epsilon = Long.parseLong(epsilonBinary.toString(), 2);
+        return gamma * epsilon;
     }
 }
