@@ -4,6 +4,9 @@ import util.DailyPuzzle;
 
 import java.util.List;
 
+/**
+ * https://adventofcode.com/2021/day/2
+ */
 public class DivePuzzle extends DailyPuzzle {
 
     public static void main(String[] args) {

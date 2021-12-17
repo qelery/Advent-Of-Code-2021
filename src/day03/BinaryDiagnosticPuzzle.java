@@ -5,6 +5,9 @@ import util.DailyPuzzle;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * https://adventofcode.com/2021/day/3
+ */
 public class BinaryDiagnosticPuzzle extends DailyPuzzle {
 
     public static void main(String[] args) {

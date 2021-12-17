@@ -5,6 +5,9 @@ import util.DailyPuzzle;
 
 import java.util.List;
 
+/**
+ * https://adventofcode.com/2021/day/1
+ */
 public class SonarSweepPuzzle extends DailyPuzzle {
 
     public static void main(String[] args) {
