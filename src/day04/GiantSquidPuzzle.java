@@ -4,8 +4,19 @@ import util.DailyPuzzle;
 
 import java.util.*;
 
+/**
+ * https://adventofcode.com/2021/day/4
+ */
 public class GiantSquidPuzzle extends DailyPuzzle {
 
+    /**
+     * Explanation - construct an object called Bingo Board that has
+     * a List<Set<Integer>> structure representing the values in columns,
+     * and use the same structure for the rows. Checking a marking off
+     * a number on a card means  iterating over each set and removing
+     * the number if it's present. A card wins when one of its sets
+     * is emptied.
+     */
     public static void main(String[] args) {
         List<String> lines = readFile("day04.txt");
         int[] calledNumbers = parseCalledNumbers(lines);
@@ -14,11 +25,11 @@ public class GiantSquidPuzzle extends DailyPuzzle {
         System.out.println("Part 2 - Score of last winning board: " + scoreLastWinningBoard(calledNumbers, bingoBoards));
     }
 
-    private static int[] parseCalledNumbers(List<String> lines) {
+    public static int[] parseCalledNumbers(List<String> lines) {
         return Arrays.stream(lines.get(0).split(",")).mapToInt(Integer::parseInt).toArray();
     }
 
-    private static List<BingoBoard> parseBoards(List<String> lines) {
+    public static List<BingoBoard> parseBoards(List<String> lines) {
         List<BingoBoard> boards = new ArrayList<>();
         List<Set<Integer>> rows = new ArrayList<>();
         List<Set<Integer>> cols = new ArrayList<>();
@@ -47,23 +58,20 @@ public class GiantSquidPuzzle extends DailyPuzzle {
     }
 
     public static int scoreFirstWinningBoard(int[] calledNumbers, List<BingoBoard> boards) {
-        for (int n : calledNumbers) {
-            for (BingoBoard board : boards) {
-                if (board.markNumber(n) && board.checkForWin()) {
-                    return n * board.sumUnmarkedNumbers();
-                }
-            }
-        }
-        return -1;
+        return scoreNthWinningBoard(calledNumbers, boards, 1);
     }
 
     public static int scoreLastWinningBoard(int[] calledNumbers, List<BingoBoard> boards) {
+        return scoreNthWinningBoard(calledNumbers, boards, boards.size() - 1);
+    }
+
+    private static int scoreNthWinningBoard(int[] calledNumbers, List<BingoBoard> boards, int n) {
         int winners = 0;
-        for (int n : calledNumbers) {
+        for (int x : calledNumbers) {
             for (BingoBoard board : boards) {
-                if (!board.hasWon() && board.markNumber(n) && board.checkForWin()) {
-                    if (++winners == boards.size() - 1) {
-                        return n * board.sumUnmarkedNumbers();
+                if (!board.hasWon() && board.markNumber(x) && board.checkForWin()) {
+                    if (++winners == n) {
+                        return x * board.sumUnmarkedNumbers();
                     }
                 }
             }
