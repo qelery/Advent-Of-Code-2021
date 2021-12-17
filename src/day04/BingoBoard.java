@@ -6,12 +6,14 @@ import java.util.Set;
 
 public class BingoBoard {
 
-    List<Set<Integer>> columns;
-    List<Set<Integer>> rows;
+    private final List<Set<Integer>> columns;
+    private final List<Set<Integer>> rows;
+    private boolean hasWon;
 
     public BingoBoard(List<Set<Integer>> columns, List<Set<Integer>> rows) {
         this.columns = columns;
         this.rows = rows;
+        this.hasWon = false;
     }
 
     public boolean markNumber(int x) {
@@ -23,7 +25,12 @@ public class BingoBoard {
     }
 
     public boolean checkForWin() {
-        return fullColumnMarked() || fullRowMarked();
+        hasWon = fullColumnMarked() || fullRowMarked();
+        return hasWon;
+    }
+
+    public boolean hasWon() {
+        return hasWon;
     }
 
     private boolean findNumberInColumn(int x) {
@@ -33,7 +40,6 @@ public class BingoBoard {
     private boolean findNumberInRow(int x) {
         return rows.stream().anyMatch(set -> set.remove(x));
     }
-
 
     private boolean fullColumnMarked() {
         return columns.stream().anyMatch(Set::isEmpty);

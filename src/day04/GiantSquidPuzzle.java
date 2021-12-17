@@ -4,13 +4,14 @@ import util.DailyPuzzle;
 
 import java.util.*;
 
-public class GiantSquidPuzzle  extends DailyPuzzle {
+public class GiantSquidPuzzle extends DailyPuzzle {
 
     public static void main(String[] args) {
         List<String> lines = readFile("day04.txt");
         int[] calledNumbers = parseCalledNumbers(lines);
         List<BingoBoard> bingoBoards = parseBoards(lines);
         System.out.println("Part 1 - Score of first winning board: " + scoreFirstWinningBoard(calledNumbers, bingoBoards));
+        System.out.println("Part 2 - Score of last winning board: " + scoreLastWinningBoard(calledNumbers, bingoBoards));
     }
 
     private static int[] parseCalledNumbers(List<String> lines) {
@@ -30,7 +31,7 @@ public class GiantSquidPuzzle  extends DailyPuzzle {
             }
             Set<Integer> row = new HashSet<>();
             int j = 0;
-            for (String s: lines.get(i).trim().split("\\s+")) {
+            for (String s : lines.get(i).trim().split("\\s+")) {
                 Integer x = Integer.valueOf(s);
                 row.add(x);
                 if (j + 1 > cols.size()) {
@@ -46,10 +47,24 @@ public class GiantSquidPuzzle  extends DailyPuzzle {
     }
 
     public static int scoreFirstWinningBoard(int[] calledNumbers, List<BingoBoard> boards) {
-        for (int n: calledNumbers) {
-            for (BingoBoard board: boards) {
+        for (int n : calledNumbers) {
+            for (BingoBoard board : boards) {
                 if (board.markNumber(n) && board.checkForWin()) {
                     return n * board.sumUnmarkedNumbers();
+                }
+            }
+        }
+        return -1;
+    }
+
+    public static int scoreLastWinningBoard(int[] calledNumbers, List<BingoBoard> boards) {
+        int winners = 0;
+        for (int n : calledNumbers) {
+            for (BingoBoard board : boards) {
+                if (!board.hasWon() && board.markNumber(n) && board.checkForWin()) {
+                    if (++winners == boards.size() - 1) {
+                        return n * board.sumUnmarkedNumbers();
+                    }
                 }
             }
         }
