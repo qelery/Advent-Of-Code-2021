@@ -1,7 +1,7 @@
 package day01;
 
+import puzzleutils.DailyPuzzle;
 import util.Conversions;
-import util.DailyPuzzle;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class SonarSweepPuzzle extends DailyPuzzle {
      * for the first element of SlidingWindowA and the last element of SlidingWindowB. Therefore,
      * the difference between the two windows is the difference between the first element of
      * SlidingWindowA and the last element of SlidingWindowB.
-     *
+     * <p>
      * Time Complexity: O(n)
      * Space Complexity: O(n)
      */

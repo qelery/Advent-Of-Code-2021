@@ -1,6 +1,6 @@
 package day03;
 
-import util.DailyPuzzle;
+import puzzleutils.DailyPuzzle;
 
 import java.util.ArrayList;
 import java.util.List;

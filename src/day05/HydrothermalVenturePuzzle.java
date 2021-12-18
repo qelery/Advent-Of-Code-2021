@@ -1,5 +1,7 @@
 package day05;
 
+import puzzleutils.DailyPuzzle;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.Map;
 /**
  * https://adventofcode.com/2021/day/5
  */
-public class HydrothermalVenturePuzzle extends util.DailyPuzzle {
+public class HydrothermalVenturePuzzle extends DailyPuzzle {
 
     /**
      * Explanation - Create a map that keeps track of the number of
