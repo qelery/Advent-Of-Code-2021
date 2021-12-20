@@ -1,6 +1,7 @@
 package day05;
 
 import puzzleutils.DailyPuzzle;
+import puzzleutils.Point;
 
 import java.util.ArrayList;
 import java.util.HashMap;

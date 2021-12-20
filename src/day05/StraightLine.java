@@ -1,5 +1,7 @@
 package day05;
 
+import puzzleutils.Point;
+
 import java.util.ArrayList;
 import java.util.List;
 

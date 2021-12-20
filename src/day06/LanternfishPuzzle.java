@@ -7,7 +7,7 @@ import java.util.Arrays;
 /**
  * https://adventofcode.com/2021/day/6
  */
-public class Lanternfish extends DailyPuzzle {
+public class LanternfishPuzzle extends DailyPuzzle {
 
     static int MAX_AGE = 8;
 
@@ -24,8 +24,8 @@ public class Lanternfish extends DailyPuzzle {
     public static void main(String[] args) {
         String fish = readFile("day06.txt").get(0);
         long[] groupedTimers = groupReproductionTimers(fish);
-        System.out.println("Fish after 80 days elapsed: " + simulateGrowth(groupedTimers, 80));
-        System.out.println("Fish after 256 days elapsed: " + simulateGrowth(groupedTimers, 256));
+        System.out.println("Part 1 - Fish after 80 days elapsed: " + simulateGrowth(groupedTimers, 80));
+        System.out.println("Part 2 - Fish after 256 days elapsed: " + simulateGrowth(groupedTimers, 256));
     }
 
     public static long[] groupReproductionTimers(String fish) {

@@ -13,7 +13,7 @@ public class BinaryDiagnosticPuzzle extends DailyPuzzle {
     public static void main(String[] args) {
         List<String> lines = readFile("day03.txt");
         System.out.println("Part 1 - Power Consumption: " + calculatePowerConsumption(lines));
-        System.out.println("Part 1 - Life Support Rating: " + calculateLifeSupportRating(lines));
+        System.out.println("Part 2 - Life Support Rating: " + calculateLifeSupportRating(lines));
     }
 
     /**
